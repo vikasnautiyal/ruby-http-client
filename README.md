@@ -1,4 +1,4 @@
-[![Travis Badge](https://travis-ci.org/sendgrid/python-http-client.svg?branch=master)](https://travis-ci.org/sendgrid/ruby-http-client)
+[![Travis Badge](https://travis-ci.org/sendgrid/ruby-http-client.svg?branch=master)](https://travis-ci.org/sendgrid/ruby-http-client)
 
 **Quickly and easily access any REST or REST-like API.**
 
