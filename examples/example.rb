@@ -3,16 +3,16 @@ require_relative '../lib/ruby_http_client'
 
 Config.new
 headers = JSON.parse('
-  { 
+  {
     "Authorization": "Bearer ' + ENV['SENDGRID_API_KEY'] + '",
-    "Content-Type": "application/json" 
+    "Content-Type": "application/json"
   }
 ')
-host = ENV['HOST']
+host = ENV['LOCAL_HOST']
 client = SendGrid::Client.new(host: host, request_headers: headers)
 
 # GET Collection
-query_params = {"limit" => 100, "offset" => 0}
+query_params = { 'limit' => 100, 'offset' => 0 }
 response = client.version('v3').api_keys.get(query_params: query_params)
 puts response.status_code
 puts response.response_body
@@ -33,10 +33,10 @@ response = client.version('v3').api_keys.post(request_body: request_body)
 puts response.status_code
 puts response.response_body
 puts response.response_headers
-api_key_id = JSON.parse(response.response_body)["api_key_id"]
+api_key_id = JSON.parse(response.response_body)['api_key_id']
 
 # GET Single
-response = client.version('v3').api_keys._(api_key_id).get()
+response = client.version('v3').api_keys._(api_key_id).get
 puts response.status_code
 puts response.response_body
 puts response.response_headers
@@ -68,6 +68,6 @@ puts response.response_body
 puts response.response_headers
 
 # DELETE
-response = client.api_keys._(api_key_id).delete()
+response = client.api_keys._(api_key_id).delete
 puts response.status_code
 puts response.response_headers
