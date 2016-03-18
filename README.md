@@ -7,7 +7,7 @@ Here is a quick example:
 `GET /your/api/{param}/call`
 
 ```ruby
-require ruby_http_client
+require 'ruby_http_client'
 global_headers = {'Authorization' => 'Basic XXXXXXX' }
 client = SendGrid::Client(host: 'base_url', request_headers: global_headers)
 client.your.api._(param).call.get
@@ -19,7 +19,7 @@ puts response.response_headers
 `POST /your/api/{param}/call` with headers, query parameters and a request body with versioning.
 
 ```ruby
-import ruby_http_client
+import 'ruby_http_client'
 global_headers = {'Authorization' => 'Basic XXXXXXX' }
 client = SendGrid::Client(host: 'base_url', request_headers: global_headers)
 query_params = { 'hello' => 0, 'world' => 1 }
@@ -46,7 +46,7 @@ First, update your .env with your [SENDGRID_API_KEY](https://app.sendgrid.com/se
 Following is an abridged example, here is the [full working code](https://github.com/sendgrid/ruby-http-client/tree/master/examples).
 
 ```ruby
-require ruby_http_client
+require 'ruby_http_client'
 
 SendGrid::Config.new
 headers = JSON.parse('
