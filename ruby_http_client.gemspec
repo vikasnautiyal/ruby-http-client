@@ -11,13 +11,11 @@ Gem::Specification.new do |spec|
   spec.description = 'Quickly and easily access any REST or REST-like API.'
   spec.homepage    = 'http://github.com/sendgrid/ruby-http-client'
   spec.license     = 'MIT'
-
+  spec.required_ruby_version = '>= 2.2'
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(/^bin/) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(/^(test|spec|features)/)
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'bundler', '~> 1.6'
+  spec.add_development_dependency 'rake', '~> 0'
 end
