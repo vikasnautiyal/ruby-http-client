@@ -19,7 +19,7 @@ puts response.response_headers
 `POST /your/api/{param}/call` with headers, query parameters and a request body with versioning.
 
 ```ruby
-import 'ruby_http_client'
+require 'ruby_http_client'
 global_headers = {'Authorization' => 'Basic XXXXXXX' }
 client = SendGrid::Client(host: 'base_url', request_headers: global_headers)
 query_params = { 'hello' => 0, 'world' => 1 }
