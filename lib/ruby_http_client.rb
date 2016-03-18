@@ -4,6 +4,17 @@ module SendGrid
   require 'net/http'
   require 'net/https'
 
+  # Loads environment variables from a .env file.
+  class Config
+    def initialize
+        File.open('./.env').readlines.each do |line|
+        key, value = line.split '='
+        ENV[key] = value.chomp
+        end
+        ENV
+    end
+  end
+  
   # Holds the response from an API call.
   class Response
     # * *Args*    :

@@ -1,7 +1,6 @@
-require_relative '../lib/config'
 require_relative '../lib/ruby_http_client'
 
-Config.new
+SendGrid::Config.new
 headers = JSON.parse('
   {
     "Authorization": "Bearer ' + ENV['SENDGRID_API_KEY'] + '",

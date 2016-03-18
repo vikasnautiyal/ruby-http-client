@@ -104,10 +104,6 @@ This allows for the following mapping from a URL to a method chain:
 
 `/api_client/{api_key_id}/version` maps to `client.api_client._(api_key_id).version.<method>()` where <method> is a [HTTP verb](https://github.com/sendgrid/ruby-http-client/blob/master/lib/ruby_http_client.rb#L38).
 
-**congfig.rb**
-
-Loads the environment variables.
-
 <a name="testing"></a>
 ## Testing
 
