@@ -72,7 +72,7 @@ We welcome direct contributions to the python-http-client code base. Thank you!
 
 ##### Prerequisites #####
 
-* Ruby 1.6 through 2.2
+* Ruby 2.2
 * There are no external dependencies
 
 ##### Initial setup: #####
