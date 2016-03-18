@@ -105,7 +105,7 @@ response = client.api_keys._(api_key_id).delete
 
 # Announcements
 
-[2016.03.27] - We hit version 1!
+[2016.03.17] - We hit version 1!
 
 # Roadmap
 
