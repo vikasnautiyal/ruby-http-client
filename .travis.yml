@@ -14,5 +14,4 @@ notifications:
     format: html
     notify: false
 script:
-    - rubocop --fail-level=E
     - rake

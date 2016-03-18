@@ -1,4 +1,3 @@
-require_relative '../lib/config'
 require_relative '../lib/ruby_http_client'
 require 'minitest/autorun'
 
