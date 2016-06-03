@@ -26,8 +26,8 @@ global_headers = {'Authorization' => 'Basic XXXXXXX' }
 client = SendGrid::Client(host: 'base_url', request_headers: global_headers)
 client.your.api._(param).call.get
 puts response.status_code
-puts response.response_body
-puts response.response_headers
+puts response.body
+puts response.headers
 ```
 
 `POST /your/api/{param}/call` with headers, query parameters and a request body with versioning.
@@ -43,8 +43,8 @@ response = client.your.api._(param).call.post(request_body: data,
                                               query_params: query_params,
                                               request_headers: request_headers)
 puts response.status_code
-puts response.response_body
-puts response.response_headers
+puts response.body
+puts response.headers
 ```
 
 # Usage

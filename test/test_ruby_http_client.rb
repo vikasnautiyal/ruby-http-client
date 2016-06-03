@@ -2,12 +2,12 @@ require_relative '../lib/ruby_http_client'
 require 'minitest/autorun'
 
 class MockResponse
-  attr_reader :status_code, :response_body, :response_headers
+  attr_reader :status_code, :body, :headers
 
   def initialize(response)
     @status_code = response['code']
-    @response_body = response['body']
-    @response_headers = response['headers']
+    @body = response['body']
+    @headers = response['headers']
   end
 end
 
@@ -91,8 +91,8 @@ class TestClient < Minitest::Test
     args = nil
     response = @client.build_request(name, args)
     assert_equal(response.status_code, 200)
-    assert_equal(response.response_body, 'message' => 'success')
-    assert_equal(response.response_headers, 'headers' => 'test')
+    assert_equal(response.body, 'message' => 'success')
+    assert_equal(response.headers, 'headers' => 'test')
   end
 
   def add_ssl
@@ -111,7 +111,7 @@ class TestClient < Minitest::Test
   def test_method_missing
     response = @client.get
     assert_equal(response.status_code, 200)
-    assert_equal(response.response_body, 'message' => 'success')
-    assert_equal(response.response_headers, 'headers' => 'test')
+    assert_equal(response.body, 'message' => 'success')
+    assert_equal(response.headers, 'headers' => 'test')
   end
 end
