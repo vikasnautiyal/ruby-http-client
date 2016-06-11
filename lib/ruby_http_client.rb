@@ -148,6 +148,9 @@ module SendGrid
       request = net_http.new(uri.request_uri)
       request = build_request_headers(request)
       request.body = @request_body.to_json if @request_body
+      if request.body
+        request['Content-Type'] = 'application/json'
+      end
       make_request(http, request)
     end
 

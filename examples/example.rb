@@ -3,8 +3,7 @@ require_relative '../lib/ruby_http_client'
 # This example uses the SendGrid API as an example
 headers = JSON.parse('
   {
-    "Authorization": "Bearer ' + ENV['SENDGRID_API_KEY'] + '",
-    "Content-Type": "application/json"
+    "Authorization": "Bearer ' + ENV['SENDGRID_API_KEY'] + '"
   }
 ')
 host =  'https://api.sendgrid.com'
