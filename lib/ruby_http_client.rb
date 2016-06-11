@@ -150,6 +150,8 @@ module SendGrid
       request.body = @request_body.to_json if @request_body
       if request.body
         request['Content-Type'] = 'application/json'
+      elsif !request.body and (name = "post")
+        request['Content-Type'] = ''
       end
       make_request(http, request)
     end
