@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.2] - 2016-06-14
+### Fix
+- Typo in 2.1.1 fix
+
 ## [2.1.1] - 2016-06-10
 ### Fix
 - Deal with an edge case where when you send a POST with no body, net/http sets the content type to application/x-www-form-urlencoded
