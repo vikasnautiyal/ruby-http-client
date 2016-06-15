@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.3] - 2016-06-14
+### Fix
+- Logic error
+
 ## [2.1.2] - 2016-06-14
 ### Fix
 - Typo in 2.1.1 fix
