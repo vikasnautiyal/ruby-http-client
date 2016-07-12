@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.4] - 2016-07-12
+### Fix
+- [Pull Request #2](https://github.com/sendgrid/ruby-http-client/pull/2), thanks [Billy Watson](https://github.com/billywatson)!
+- Remove Rubygems version: http://guides.rubygems.org/specification-reference/#rubygems_version
+
 ## [2.1.3] - 2016-06-14
 ### Fix
 - Logic error

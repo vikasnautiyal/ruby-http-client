@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name        = 'ruby_http_client'
-  spec.version     = '2.1.3'
+  spec.version     = '2.1.4'
   spec.authors     = ['Elmer Thomas']
   spec.email       = 'dx@sendgrid.com'
   spec.summary     = 'A simple REST client'
