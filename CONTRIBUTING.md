@@ -64,7 +64,7 @@ We welcome direct contributions to the ruby-http-client code base. Thank you!
 
 ##### Prerequisites #####
 
-- Ruby 2.2 or higher
+- Ruby version 2.2
 
 ##### Initial setup: #####
 

@@ -10,13 +10,15 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 
 # Installation
 
+## Prerequisites
+
+- Ruby version 2.2
+
+## Install Package
+
 ```bash
 gem install ruby_http_client
 ```
-
-## Dependencies
-
-- Ruby 2.2 or higher
 
 # Quick Start
 
