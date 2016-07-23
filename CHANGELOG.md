@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0] - 2016-07-23
+### BREAKING CHANGE
+- Implements [issue #3](https://github.com/sendgrid/ruby-http-client/issues/3): Headers on Response
+- Response headers now return a hash instead of a string
+- Thanks to [Chris France](https://github.com/hipsterelitist) for the pull request!
+
 ## [2.1.4] - 2016-07-12
 ### Fix
 - [Pull Request #2](https://github.com/sendgrid/ruby-http-client/pull/2), thanks [Billy Watson](https://github.com/billywatson)!
