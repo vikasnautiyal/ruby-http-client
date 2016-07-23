@@ -13,7 +13,7 @@ module SendGrid
     def initialize(response)
       @status_code = response.code
       @body = response.body
-      @headers = response.to_hash.inspect
+      @headers = response.to_hash
     end
   end
 
