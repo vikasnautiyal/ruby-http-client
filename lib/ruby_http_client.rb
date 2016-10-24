@@ -147,11 +147,16 @@ module SendGrid
       net_http = Kernel.const_get('Net::HTTP::' + name.to_s.capitalize)
       request = net_http.new(uri.request_uri)
       request = build_request_headers(request)
-      request.body = @request_body.to_json if @request_body
-      if request.body && !@request_headers.has_key?('Content-Type')
+      if (@request_body &&
+          (!@request_headers.has_key?('Content-Type') ||
+           @request_headers['Content-Type'] == 'application/json')
+      )
+        request.body = @request_body.to_json
         request['Content-Type'] = 'application/json'
-      elsif !request.body and (name.to_s == "post")
+      elsif !@request_body and (name.to_s == "post")
         request['Content-Type'] = ''
+      else
+        request.body = @request_body
       end
       make_request(http, request)
     end
