@@ -50,20 +50,20 @@ class TestClient < Minitest::Test
   def test_build_request_headers
     request = {}
     request = @client.build_request_headers(request)
-    assert_equal(@client.request_headers, request)
+    assert_equal(request, @client.request_headers)
   end
 
   def test_add_version
     url = ''
     @client.add_version(url)
-    assert_equal(url, "/#{@version}")
+    assert_equal("/#{@version}", url)
   end
 
   def test_build_query_params
     url = ''
     query_params = { 'limit' => 100, 'offset' => 0 }
     url = @client.build_query_params(url, query_params)
-    assert_equal(url, '?limit=100&offset=0')
+    assert_equal('?limit=100&offset=0', url)
   end
 
   def test_build_url
@@ -71,28 +71,28 @@ class TestClient < Minitest::Test
     params = { 'limit' => 100, 'offset' => 0 }
     url = URI.parse(@host + '/' + @version +
                     '/my/path/to/the/endpoint?limit=100&offset=0')
-    assert_equal(url1.build_url(query_params: params), url)
+    assert_equal(url, url1.build_url(query_params: params))
 
     url1 = url1.one_more
     params = { 'limit' => 100, 'offset' => 0 }
     url = URI.parse(@host + '/' + @version +
                     '/my/path/to/the/endpoint/one_more?limit=100&offset=0')
-    assert_equal(url1.build_url(query_params: params), url)
+    assert_equal(url, url1.build_url(query_params: params))
 
     url2 = @client.my.path._('to').the.endpoint
     params = { 'limit' => 100, 'offset' => 0 }
     url = URI.parse(@host + '/' + @version +
                     '/my/path/to/the/endpoint?limit=100&offset=0')
-    assert_equal(url2.build_url(query_params: params), url)
+    assert_equal(url, url2.build_url(query_params: params))
   end
 
   def test_build_request
     name = 'get'
     args = nil
     response = @client.build_request(name, args)
-    assert_equal(response.status_code, 200)
-    assert_equal(response.body, 'message' => 'success')
-    assert_equal(response.headers, 'headers' => 'test')
+    assert_equal(200, response.status_code)
+    assert_equal({'message' => 'success'}, response.body)
+    assert_equal({'headers' => 'test'}, response.headers)
   end
 
   def test_build_request_post_empty_content_type
@@ -156,19 +156,19 @@ class TestClient < Minitest::Test
     uri = URI.parse('https://localhost:4010')
     http = Net::HTTP.new(uri.host, uri.port)
     http = @client.add_ssl(http)
-    assert_equal(http.use_ssl, true)
-    assert_equal(http.verify_mode, OpenSSL::SSL::VERIFY_NONE)
+    assert_equal(true, http.use_ssl)
+    assert_equal(OpenSSL::SSL::VERIFY_NONE, http.verify_mode)
   end
 
   def test__
     url1 = @client._('test')
-    assert_equal(url1.url_path, ['test'])
+    assert_equal(['test'], url1.url_path)
   end
 
   def test_method_missing
     response = @client.get
-    assert_equal(response.status_code, 200)
-    assert_equal(response.body, 'message' => 'success')
-    assert_equal(response.headers, 'headers' => 'test')
+    assert_equal(200, response.status_code)
+    assert_equal({'message' => 'success'}, response.body)
+    assert_equal({'headers' => 'test'}, response.headers)
   end
 end
