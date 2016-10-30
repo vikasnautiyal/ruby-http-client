@@ -19,7 +19,7 @@ module SendGrid
 
   # A simple REST client.
   class Client
-    attr_reader :host, :request_headers, :url_path
+    attr_reader :host, :request_headers, :url_path, :request, :http
     # * *Args*    :
     #   - +host+ -> Base URL for the api. (e.g. https://api.sendgrid.com)
     #   - +request_headers+ -> A hash of the headers you want applied on
@@ -142,23 +142,21 @@ module SendGrid
     def build_request(name, args)
       build_args(args) if args
       uri = build_url(query_params: @query_params)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http = add_ssl(http)
+      @http = add_ssl(Net::HTTP.new(uri.host, uri.port))
       net_http = Kernel.const_get('Net::HTTP::' + name.to_s.capitalize)
-      request = net_http.new(uri.request_uri)
-      request = build_request_headers(request)
+      @request = build_request_headers(net_http.new(uri.request_uri))
       if (@request_body &&
           (!@request_headers.has_key?('Content-Type') ||
            @request_headers['Content-Type'] == 'application/json')
       )
-        request.body = @request_body.to_json
-        request['Content-Type'] = 'application/json'
+        @request.body = @request_body.to_json
+        @request['Content-Type'] = 'application/json'
       elsif !@request_body and (name.to_s == "post")
-        request['Content-Type'] = ''
+        @request['Content-Type'] = ''
       else
-        request.body = @request_body
+        @request.body = @request_body
       end
-      make_request(http, request)
+      make_request(@http, @request)
     end
 
     # Make the API call and return the response. This is separated into

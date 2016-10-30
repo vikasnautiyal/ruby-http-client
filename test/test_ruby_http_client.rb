@@ -1,4 +1,4 @@
-require_relative '../lib/ruby_http_client'
+require 'ruby_http_client'
 require 'minitest/autorun'
 
 class MockResponse
@@ -93,6 +93,63 @@ class TestClient < Minitest::Test
     assert_equal(response.status_code, 200)
     assert_equal(response.body, 'message' => 'success')
     assert_equal(response.headers, 'headers' => 'test')
+  end
+
+  def test_build_request_post_empty_content_type
+    headers = {
+    }
+    client = MockRequest.new(
+      host: 'https://localhost',
+      request_headers: headers,
+      version: 'v3'
+    )
+    args = [{'request_body' => {"hogekey" => "hogevalue"}}]
+    client.build_request('post', args)
+    assert_equal('application/json', client.request['Content-Type'])
+    assert_equal('{"hogekey":"hogevalue"}', client.request.body)
+  end
+
+  def test_build_request_get_application_json
+    headers = {
+      'Content-Type' => 'application/json'
+    }
+    client = MockRequest.new(
+      host: 'https://localhost',
+      request_headers: headers,
+      version: 'v3'
+    )
+    client.build_request('get', nil)
+    assert_equal('application/json', client.request['Content-Type'])
+    assert_equal(nil, client.request.body)
+  end
+
+  def test_build_request_post_empty_body
+    headers = {
+      'Content-Type' => 'application/json'
+    }
+    client = MockRequest.new(
+      host: 'https://localhost',
+      request_headers: headers,
+      version: 'v3'
+    )
+    client.build_request('post', nil)
+    assert_equal('', client.request['Content-Type'])
+    assert_equal(nil, client.request.body)
+  end
+
+  def test_build_request_post_multipart
+    headers = {
+      'Content-Type' => 'multipart/form-data; boundary=xYzZY'
+    }
+    client = MockRequest.new(
+      host: 'https://localhost',
+      request_headers: headers,
+    )
+    name = 'post'
+    args = [{'request_body' => 'hogebody'}]
+    client.build_request(name, args)
+    assert_equal('multipart/form-data; boundary=xYzZY', client.request['Content-Type'])
+    assert_equal('hogebody', client.request.body)
   end
 
   def add_ssl
