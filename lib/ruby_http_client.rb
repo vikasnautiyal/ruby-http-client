@@ -181,7 +181,7 @@ module SendGrid
       protocol = host.split(':')[0]
       if protocol == 'https'
         http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
       end
       http
     end
