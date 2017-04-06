@@ -156,8 +156,8 @@ class TestClient < Minitest::Test
     uri = URI.parse('https://localhost:4010')
     http = Net::HTTP.new(uri.host, uri.port)
     http = @client.add_ssl(http)
-    assert_equal(true, http.use_ssl)
-    assert_equal(OpenSSL::SSL::VERIFY_NONE, http.verify_mode)
+    assert_equal(http.use_ssl, true)
+    assert_equal(http.verify_mode, OpenSSL::SSL::VERIFY_PEER)
   end
 
   def test__

@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.1] - 2016-01-25
+### Fix
+- [Pull Request #7](https://github.com/sendgrid/ruby-http-client/pull/7)
+- Fixes [issue #6](https://github.com/sendgrid/ruby-http-client/issues/6): TLS certificates not verified
+- Thanks to [Koen Rouwhorst](https://github.com/koenrh) for the pull request!
+
 ## [3.0.0] - 2016-07-23
 ### BREAKING CHANGE
 - Implements [issue #3](https://github.com/sendgrid/ruby-http-client/issues/3): Headers on Response
