@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.0] - 2016-04-10
+### Added
+- #5 Ability to set the Content-Type header
+- Thanks to [Wataru Sato](https://github.com/awwa) for the pull request!
+
 ## [3.0.2] - 2016-04-10
 ### Update
 - #8 Internal refactor

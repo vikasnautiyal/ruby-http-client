@@ -12,7 +12,7 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 
 ## Prerequisites
 
-- Ruby version 2.2
+- Ruby version 2.2+
 
 ## Install Package
 
