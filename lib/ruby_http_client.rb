@@ -32,9 +32,9 @@ module SendGrid
     #
     def initialize(host: nil, request_headers: nil, version: nil, url_path: nil)
       @host = host
-      @request_headers = request_headers ? request_headers : {}
+      @request_headers = request_headers || {}
       @version = version
-      @url_path = url_path ? url_path : []
+      @url_path = url_path || []
       @methods = %w(delete get patch post put)
       @query_params = nil
       @request_body = nil
@@ -46,7 +46,7 @@ module SendGrid
     #   - +request_headers+ -> Hash of request header key/values
     #
     def update_headers(request_headers)
-      @request_headers = @request_headers.merge(request_headers)
+      @request_headers.merge!(request_headers)
     end
 
     # Build the final request headers
@@ -70,9 +70,9 @@ module SendGrid
     # * *Returns* :
     #   - The url string with the version pre-pended
     #
-    def add_version(url)
-      url.concat("/#{@version}")
-      url
+    def add_version(url = nil)
+      path = @version ? "/#{@version}" : ''
+      url.concat(path)
     end
 
     # Add query parameters to the url
@@ -84,14 +84,8 @@ module SendGrid
     #   - The url string with the query parameters appended
     #
     def build_query_params(url, query_params)
-      url.concat('?')
-      count = 0
-      query_params.each do |key, value|
-        url.concat('&') if count > 0
-        url.concat("#{key}=#{value}")
-        count += 1
-      end
-      url
+      params = query_params.map { |key, value| "#{key}=#{value}" }.join('&')
+      url.concat("?#{params}")
     end
 
     # Set the query params, request headers and request body
@@ -122,11 +116,7 @@ module SendGrid
     #   - The final url string
     #
     def build_url(query_params: nil)
-      url = ''
-      url = add_version(url) if @version
-      @url_path.each do |x|
-        url.concat("/#{x}")
-      end
+      url = [add_version(''), *@url_path].join('/')
       url = build_query_params(url, query_params) if query_params
       URI.parse("#{@host}#{url}")
     end
@@ -178,8 +168,7 @@ module SendGrid
     #   - HTTP::NET object
     #
     def add_ssl(http)
-      protocol = host.split(':')[0]
-      if protocol == 'https'
+      if host.start_with?('https')
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
       end
