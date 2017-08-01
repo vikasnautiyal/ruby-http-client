@@ -84,7 +84,7 @@ module SendGrid
     #   - The url string with the query parameters appended
     #
     def build_query_params(url, query_params)
-      params = query_params.map { |key, value| "#{key}=#{value}" }.join('&')
+      params = URI.encode_www_form(query_params)
       url.concat("?#{params}")
     end
 
