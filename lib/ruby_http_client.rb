@@ -15,6 +15,12 @@ module SendGrid
       @body = response.body
       @headers = response.to_hash
     end
+
+    # Returns the body as a hash
+    #
+    def parsed_body
+      @parsed_body ||= JSON.parse(@body, symbolize_names: true)
+    end
   end
 
   # A simple REST client.
