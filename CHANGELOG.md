@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0] - 2017-09-01
+### Added
+- #12 Add a helper returns the response body as a hash
+- Thanks to [Diego Camargo](https://github.com/belfazt) for the pull request!
+
 ## [3.1.0] - 2016-04-10
 ### Added
 - #5 Ability to set the Content-Type header
