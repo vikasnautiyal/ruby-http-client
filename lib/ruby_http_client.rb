@@ -36,7 +36,7 @@ module SendGrid
     #                  (e.g. client._("/v3"))
     #   - +url_path+ -> A list of the url path segments
     #
-    def initialize(host: nil, request_headers: nil, version: nil, url_path: nil)
+    def initialize(host: nil, request_headers: nil, version: nil, url_path: nil, http_options: {})
       @host = host
       @request_headers = request_headers || {}
       @version = version
@@ -44,6 +44,7 @@ module SendGrid
       @methods = %w(delete get patch post put)
       @query_params = nil
       @request_body = nil
+      @http_options = http_options
     end
 
     # Update the headers for the request
@@ -152,6 +153,9 @@ module SendGrid
       else
         @request.body = @request_body
       end
+      @http_options.each do |attribute, value|
+        @http.send("#{attribute}=", value)
+      end
       make_request(@http, @request)
     end
 
@@ -198,7 +202,8 @@ module SendGrid
       url_path = name ? @url_path.push(name) : @url_path
       @url_path = []
       Client.new(host: @host, request_headers: @request_headers,
-                 version: @version, url_path: url_path)
+                 version: @version, url_path: url_path,
+                 http_options: @http_options)
     end
 
     # Dynamically add segments to the url, then call a method.
