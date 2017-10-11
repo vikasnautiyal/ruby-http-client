@@ -120,7 +120,7 @@ class TestClient < Minitest::Test
     )
     client.build_request('get', nil)
     assert_equal('application/json', client.request['Content-Type'])
-    assert_equal(nil, client.request.body)
+    assert_nil(client.request.body)
   end
 
   def test_build_request_post_empty_body
@@ -134,7 +134,7 @@ class TestClient < Minitest::Test
     )
     client.build_request('post', nil)
     assert_equal('', client.request['Content-Type'])
-    assert_equal(nil, client.request.body)
+    assert_nil(client.request.body)
   end
 
   def test_build_request_post_multipart
