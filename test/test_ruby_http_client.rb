@@ -34,6 +34,9 @@ class TestClient < Minitest::Test
     @http_options = {open_timeout: 60, read_timeout: 60}
     @client = MockRequest.new(host: @host,
                               request_headers: @headers,
+                              version: @version)
+    @client_with_options = MockRequest.new(host: @host,
+                              request_headers: @headers,
                               version: @version,
                               http_options: @http_options)
   end
@@ -172,5 +175,12 @@ class TestClient < Minitest::Test
     assert_equal(200, response.status_code)
     assert_equal({'message' => 'success'}, response.body)
     assert_equal({'headers' => 'test'}, response.headers)
+  end
+
+  def test_http_options
+    url1 = @client_with_options._('test')
+    assert_equal(@host, @client_with_options.host)
+    assert_equal(@headers, @client_with_options.request_headers)
+    assert_equal(['test'], url1.url_path)
   end
 end
