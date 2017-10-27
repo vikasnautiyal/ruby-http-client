@@ -30,6 +30,28 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 
 - Ruby version 2.2+
 
+## Setup Environment Variables
+
+### Initial Setup
+
+Copy ```.env_sample``` and change its name to ```.env.```
+
+```bash
+git clone https://github.com/sendgrid/ruby_http_client.git
+cd ruby_http_client
+cp .env_sample .env
+```
+
+### Environment Variable
+
+Update the development environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys), for example:
+
+```bash
+echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env
+echo "sendgrid.env" >> .gitignore
+source ./sendgrid.env
+```
+
 ## Install Package
 
 ```bash
