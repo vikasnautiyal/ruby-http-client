@@ -37,8 +37,6 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 Copy ```.env_sample``` and change its name to ```.env.```
 
 ```bash
-git clone https://github.com/sendgrid/ruby_http_client.git
-cd ruby_http_client
 cp .env_sample .env
 ```
 
