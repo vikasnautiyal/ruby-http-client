@@ -32,14 +32,6 @@ All updates to this library is documented in our [CHANGELOG](https://github.com/
 
 ## Setup Environment Variables
 
-### Initial Setup
-
-Copy ```.env_sample``` and change its name to ```.env.```
-
-```bash
-cp .env_sample .env
-```
-
 ### Environment Variable
 
 Update the development environment with your [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys), for example:
