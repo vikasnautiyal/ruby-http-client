@@ -61,9 +61,9 @@ class TestClient < Minitest::Test
 
   def test_build_query_params
     url = ''
-    query_params = { 'limit' => 100, 'offset' => 0 }
+    query_params = { 'limit' => 100, 'offset' => 0, 'categories' => ['category1', 'category2'] }
     url = @client.build_query_params(url, query_params)
-    assert_equal('?limit=100&offset=0', url)
+    assert_equal('?limit=100&offset=0&categories=category1&categories=category2', url)
   end
 
   def test_build_url
