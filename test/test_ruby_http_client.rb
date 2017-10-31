@@ -173,7 +173,7 @@ class TestClient < Minitest::Test
   end
 
   def test_docker_exists
-    assert(File.file?('./Docker') || File.file?('./docker/Docker'))
+    assert(File.file?('./Dockerfile') || File.file?('./docker/Dockerfile'))
   end
 
   def test_docker_compose_exists
