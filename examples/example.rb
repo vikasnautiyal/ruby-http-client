@@ -9,6 +9,12 @@ headers = JSON.parse('
 host = 'https://api.sendgrid.com'
 client = SendGrid::Client.new(host: host, request_headers: headers)
 
+# You can pass in an http_options hash to set values for NET::HTTP attributes
+# https://ruby-doc.org/stdlib-2.4.1/libdoc/net/http/rdoc/Net/HTTP.html
+# client = SendGrid::Client.new(host: host,
+#                               request_headers: headers,
+#                               http_options: {open_timeout: 15, read_timeout: 30})
+
 # GET Collection
 query_params = { 'limit' => 100, 'offset' => 0 }
 response = client.version('v3').api_keys.get(query_params: query_params)

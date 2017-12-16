@@ -32,9 +32,14 @@ class TestClient < Minitest::Test
         ')
     @host = 'http://localhost:4010'
     @version = 'v3'
+    @http_options = {open_timeout: 60, read_timeout: 60}
     @client = MockRequest.new(host: @host,
                               request_headers: @headers,
                               version: @version)
+    @client_with_options = MockRequest.new(host: @host,
+                              request_headers: @headers,
+                              version: @version,
+                              http_options: @http_options)
   end
 
   def test_init
@@ -173,6 +178,13 @@ class TestClient < Minitest::Test
     assert_equal({'headers' => 'test'}, response.headers)
   end
 
+  def test_http_options
+    url1 = @client_with_options._('test')
+    assert_equal(@host, @client_with_options.host)
+    assert_equal(@headers, @client_with_options.request_headers)
+    assert_equal(['test'], url1.url_path)
+  end
+
   def test_docker_exists
     assert(File.file?('./Dockerfile') || File.file?('./docker/Dockerfile'))
   end
@@ -242,5 +254,4 @@ class TestClient < Minitest::Test
     current_year = Time.new.year
     assert_equal(current_year, license_end_year)
   end
-  
 end
