@@ -6,7 +6,7 @@ headers = JSON.parse('
     "Authorization": "Bearer ' + ENV['SENDGRID_API_KEY'] + '"
   }
 ')
-host =  'https://api.sendgrid.com'
+host = 'https://api.sendgrid.com'
 client = SendGrid::Client.new(host: host, request_headers: headers)
 
 # You can pass in an http_options hash to set values for NET::HTTP attributes

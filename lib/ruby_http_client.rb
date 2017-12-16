@@ -41,7 +41,7 @@ module SendGrid
       @request_headers = request_headers || {}
       @version = version
       @url_path = url_path || []
-      @methods = %w(delete get patch post put)
+      @methods = %w[delete get patch post put]
       @query_params = nil
       @request_body = nil
       @http_options = http_options
@@ -91,7 +91,7 @@ module SendGrid
     #   - The url string with the query parameters appended
     #
     def build_query_params(url, query_params)
-      params = query_params.map { |key, value| "#{key}=#{value}" }.join('&')
+      params = URI.encode_www_form(query_params)
       url.concat("?#{params}")
     end
 
@@ -142,13 +142,13 @@ module SendGrid
       @http = add_ssl(Net::HTTP.new(uri.host, uri.port))
       net_http = Kernel.const_get('Net::HTTP::' + name.to_s.capitalize)
       @request = build_request_headers(net_http.new(uri.request_uri))
-      if (@request_body &&
-          (!@request_headers.has_key?('Content-Type') ||
-           @request_headers['Content-Type'] == 'application/json')
-      )
+      if @request_body &&
+         (!@request_headers.key?('Content-Type') ||
+          @request_headers['Content-Type'] == 'application/json')
+
         @request.body = @request_body.to_json
         @request['Content-Type'] = 'application/json'
-      elsif !@request_body and (name.to_s == "post")
+      elsif !@request_body && (name.to_s == 'post')
         @request['Content-Type'] = ''
       else
         @request.body = @request_body

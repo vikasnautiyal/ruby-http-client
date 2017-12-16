@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0] - 2017-10-30
+## Added
+- #11 fix: Allow for multiple values for a parameter
+- Thanks to [xiaoboa](https://github.com/xiaoboa) for the pull request!
+
 ## [3.2.0] - 2017-09-01
 ### Added
 - #12 Add a helper returns the response body as a hash

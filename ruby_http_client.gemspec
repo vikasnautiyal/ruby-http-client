@@ -1,10 +1,10 @@
-# coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name        = 'ruby_http_client'
-  spec.version     = '3.2.0'
+  spec.version     = '3.3.0'
   spec.authors     = ['Elmer Thomas']
   spec.email       = 'dx@sendgrid.com'
   spec.summary     = 'A simple REST client'
@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'rake', '~> 0'
+  spec.add_development_dependency 'simplecov', '~> 0'
 end

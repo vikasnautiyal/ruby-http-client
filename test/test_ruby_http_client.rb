@@ -1,3 +1,4 @@
+require './test/test_helper'
 require 'ruby_http_client'
 require 'minitest/autorun'
 
@@ -66,9 +67,9 @@ class TestClient < Minitest::Test
 
   def test_build_query_params
     url = ''
-    query_params = { 'limit' => 100, 'offset' => 0 }
+    query_params = { 'limit' => 100, 'offset' => 0, 'categories' => ['category1', 'category2'] }
     url = @client.build_query_params(url, query_params)
-    assert_equal('?limit=100&offset=0', url)
+    assert_equal('?limit=100&offset=0&categories=category1&categories=category2', url)
   end
 
   def test_build_url
@@ -125,7 +126,7 @@ class TestClient < Minitest::Test
     )
     client.build_request('get', nil)
     assert_equal('application/json', client.request['Content-Type'])
-    assert_equal(nil, client.request.body)
+    assert_nil(client.request.body)
   end
 
   def test_build_request_post_empty_body
@@ -139,7 +140,7 @@ class TestClient < Minitest::Test
     )
     client.build_request('post', nil)
     assert_equal('', client.request['Content-Type'])
-    assert_equal(nil, client.request.body)
+    assert_nil(client.request.body)
   end
 
   def test_build_request_post_multipart
@@ -182,5 +183,75 @@ class TestClient < Minitest::Test
     assert_equal(@host, @client_with_options.host)
     assert_equal(@headers, @client_with_options.request_headers)
     assert_equal(['test'], url1.url_path)
+  end
+
+  def test_docker_exists
+    assert(File.file?('./Dockerfile') || File.file?('./docker/Dockerfile'))
+  end
+
+  def test_docker_compose_exists
+    assert(File.file?('./docker-compose.yml') || File.file?('./docker/docker-compose.yml'))
+  end
+
+  def test_env_sample_exists
+    assert(File.file?('./.env_sample'))
+  end
+
+  def test_gitignore_exists
+    assert(File.file?('./.gitignore'))
+  end
+
+  def test_travis_exists
+    assert(File.file?('./.travis.yml'))
+  end
+
+  def test_codeclimate_exists
+    assert(File.file?('./.codeclimate.yml'))
+  end
+
+  def test_changelog_exists
+    assert(File.file?('./CHANGELOG.md'))
+  end
+
+  def test_code_of_conduct_exists
+    assert(File.file?('./CODE_OF_CONDUCT.md'))
+  end
+
+  def test_contributing_exists
+    assert(File.file?('./CONTRIBUTING.md'))
+  end
+
+  def test_issue_template_exists
+    assert(File.file?('./.github/ISSUE_TEMPLATE'))
+  end
+
+  def test_license_exists
+    assert(File.file?('./LICENSE.md') || File.file?('./LICENSE.txt'))
+  end
+
+  def test_pull_request_template_exists
+    assert(File.file?('./.github/PULL_REQUEST_TEMPLATE'))
+  end
+
+  def test_readme_exists
+    assert(File.file?('./README.md'))
+  end
+
+  def test_troubleshooting_exists
+    assert(File.file?('./TROUBLESHOOTING.md'))
+  end
+
+  def test_usage_exists
+    assert(File.file?('./USAGE.md'))
+  end
+
+  def test_use_cases_exists
+    assert(File.file?('./USE_CASES.md'))
+  end 
+  
+  def test_license_date_is_updated
+    license_end_year = IO.read('LICENSE.txt').match(/Copyright \(c\) 2016-(\d{4}) SendGrid/)[1].to_i
+    current_year = Time.new.year
+    assert_equal(current_year, license_end_year)
   end
 end
