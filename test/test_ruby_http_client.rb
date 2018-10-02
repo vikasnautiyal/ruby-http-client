@@ -185,6 +185,38 @@ class TestClient < Minitest::Test
     assert_equal(['test'], url1.url_path)
   end
 
+  def test_proxy_options
+    proxy_options = {
+      host: '127.0.0.1', port: 8080, user: 'anonymous', pass: 'secret'
+    }
+    client = MockRequest.new(
+      host: 'https://api.sendgrid.com',
+      request_headers: { 'Authorization' => 'Bearer xxx' },
+      proxy_options: proxy_options
+    ).version('v3').api_keys
+
+    assert(client.proxy_address, '127.0.0.1')
+    assert(client.proxy_pass, 'secret')
+    assert(client.proxy_port, 8080)
+    assert(client.proxy_user, 'anonymous')
+  end
+
+  def test_proxy_from_http_proxy_environment_variable
+    ENV['http_proxy'] = 'anonymous:secret@127.0.0.1:8080'
+
+    client = MockRequest.new(
+      host: 'https://api.sendgrid.com',
+      request_headers: { 'Authorization' => 'Bearer xxx' }
+    ).version('v3').api_keys
+
+    assert(client.proxy_address, '127.0.0.1')
+    assert(client.proxy_pass, 'secret')
+    assert(client.proxy_port, 8080)
+    assert(client.proxy_user, 'anonymous')
+  ensure
+    ENV.delete('http_proxy')
+  end
+
   def test_docker_exists
     assert(File.file?('./Dockerfile') || File.file?('./docker/Dockerfile'))
   end

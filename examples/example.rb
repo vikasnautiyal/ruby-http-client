@@ -15,6 +15,19 @@ client = SendGrid::Client.new(host: host, request_headers: headers)
 #                               request_headers: headers,
 #                               http_options: {open_timeout: 15, read_timeout: 30})
 
+# If you want to make request via proxy, you can set your proxy server in two ways.
+#
+# (1) Pass proxy_options hash
+#
+# client = SendGrid::Client.new(host: host,
+#                               request_headers: headers,
+#                               proxy_options: { host: '127.0.0.1', port: 8080 })
+#
+# (2) Set 'http_proxy' environment variable
+#
+# ENV['http_proxy'] = 'user:pass@127.0.0.1:8080'
+# client = SendGrid::Client.new(host: host, request_headers: headers)
+
 # GET Collection
 query_params = { 'limit' => 100, 'offset' => 0 }
 response = client.version('v3').api_keys.get(query_params: query_params)

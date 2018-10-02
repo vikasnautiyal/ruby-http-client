@@ -35,8 +35,10 @@ module SendGrid
     #                  Or just pass the version as part of the URL
     #                  (e.g. client._("/v3"))
     #   - +url_path+ -> A list of the url path segments
+    #   - +proxy_options+ -> A hash of proxy settings.
+    #                        (e.g. { host: '127.0.0.1', port: 8080 })
     #
-    def initialize(host: nil, request_headers: nil, version: nil, url_path: nil, http_options: {})
+    def initialize(host: nil, request_headers: nil, version: nil, url_path: nil, http_options: {}, proxy_options: {})
       @host = host
       @request_headers = request_headers || {}
       @version = version
@@ -45,6 +47,7 @@ module SendGrid
       @query_params = nil
       @request_body = nil
       @http_options = http_options
+      @proxy_options = proxy_options
     end
 
     # Update the headers for the request
@@ -139,7 +142,7 @@ module SendGrid
     def build_request(name, args)
       build_args(args) if args
       uri = build_url(query_params: @query_params)
-      @http = add_ssl(Net::HTTP.new(uri.host, uri.port))
+      @http = build_http(uri.host, uri.port)
       net_http = Kernel.const_get('Net::HTTP::' + name.to_s.capitalize)
       @request = build_request_headers(net_http.new(uri.request_uri))
       if @request_body &&
@@ -171,6 +174,16 @@ module SendGrid
     def make_request(http, request)
       response = http.request(request)
       Response.new(response)
+    end
+
+    # Build HTTP request object
+    #
+    # * *Returns* :
+    #   - Request object
+    def build_http(host, port)
+      params = [host, port]
+      params = params + @proxy_options.values_at(:host, :port, :user, :pass) unless @proxy_options.empty?
+      add_ssl(Net::HTTP.new(*params))
     end
 
     # Allow for https calls
