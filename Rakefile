@@ -4,5 +4,28 @@ Rake::TestTask.new do |t|
   t.libs << 'test'
 end
 
+desc 'run rubocop'
+task :rubocop do
+  sh 'rubocop -c .rubocop.yml'
+end
+
+desc 'run rubocop w/autocorrect'
+task :rubocorrect do
+  sh 'rubocop -c .rubocop.yml -a'
+end
+
+desc 'run minitest'
+task :rubocop do
+  Rake::Task[:test].invoke
+end
+
 desc 'Run tests'
-task default: :test
+task default: 'test:quick'
+
+namespace :test do
+  desc 'Run all the quick tests'
+  task :quick do
+    Rake::Task['rubocop'].invoke
+    Rake::Task['minitest'].invoke
+  end
+end
