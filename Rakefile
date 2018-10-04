@@ -15,7 +15,7 @@ task :rubocorrect do
 end
 
 desc 'run minitest'
-task :rubocop do
+task :minitest do
   Rake::Task[:test].invoke
 end
 

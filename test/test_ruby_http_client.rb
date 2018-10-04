@@ -274,7 +274,7 @@ class TestClient < Minitest::Test
   end
 
   def test_use_cases_exists
-    assert(File.file?('./USE_CASES.md'))
+    assert(File.file?('use_cases/README.md'))
   end
 
   def test_license_date_is_updated

@@ -38,7 +38,7 @@ module SendGrid
     #   - +proxy_options+ -> A hash of proxy settings.
     #                        (e.g. { host: '127.0.0.1', port: 8080 })
     #
-    def initialize(host: nil, request_headers: nil, version: nil, url_path: nil, http_options: {}, proxy_options: {})
+    def initialize(host: nil, request_headers: nil, version: nil, url_path: nil, http_options: {}, proxy_options: {}) # rubocop:disable Metrics/ParameterLists
       @host = host
       @request_headers = request_headers || {}
       @version = version
