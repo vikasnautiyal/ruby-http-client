@@ -6,7 +6,7 @@ end
 
 desc 'run rubocop'
 task :rubocop do
-  sh 'rubocop -c .rubocop.yml'
+  sh 'rubocop -c .rubocop.yml --display-only-fail-level-offenses -D'
 end
 
 desc 'run rubocop w/autocorrect'
