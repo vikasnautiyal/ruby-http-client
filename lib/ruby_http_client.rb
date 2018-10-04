@@ -182,7 +182,7 @@ module SendGrid
     #   - Request object
     def build_http(host, port)
       params = [host, port]
-      params = params + @proxy_options.values_at(:host, :port, :user, :pass) unless @proxy_options.empty?
+      params += @proxy_options.values_at(:host, :port, :user, :pass) unless @proxy_options.empty?
       add_ssl(Net::HTTP.new(*params))
     end
 
