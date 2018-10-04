@@ -217,13 +217,13 @@ class TestClient < Minitest::Test
     ENV.delete('http_proxy')
   end
 
-  def test_docker_exists
-    assert(File.file?('./Dockerfile') || File.file?('./docker/Dockerfile'))
-  end
+  # def test_docker_exists
+  #   assert(File.file?('./Dockerfile') || File.file?('./docker/Dockerfile'))
+  # end
 
-  def test_docker_compose_exists
-    assert(File.file?('./docker-compose.yml') || File.file?('./docker/docker-compose.yml'))
-  end
+  # def test_docker_compose_exists
+  #   assert(File.file?('./docker-compose.yml') || File.file?('./docker/docker-compose.yml'))
+  # end
 
   def test_env_sample_exists
     assert(File.file?('./.env_sample'))
@@ -273,13 +273,13 @@ class TestClient < Minitest::Test
     assert(File.file?('./TROUBLESHOOTING.md'))
   end
 
-  def test_usage_exists
-    assert(File.file?('./USAGE.md'))
-  end
+  # def test_usage_exists
+  #   assert(File.file?('./USAGE.md'))
+  # end
 
-  def test_use_cases_exists
-    assert(File.file?('./USE_CASES.md'))
-  end 
+  # def test_use_cases_exists
+  #   assert(File.file?('./USE_CASES.md'))
+  # end 
   
   def test_license_date_is_updated
     license_end_year = IO.read('LICENSE.txt').match(/Copyright \(c\) 2016-(\d{4}) SendGrid/)[1].to_i
